@@ -130,7 +130,7 @@ function CreativeCard({
 
 function ContactPage() {
 
-  const WHATSAPP_NUMBER = "89789097894";
+  const WHATSAPP_NUMBER = "8668108891";
 
   const initialForm = {
     name: "",
@@ -149,10 +149,9 @@ function ContactPage() {
 
   const products = [
     "General Inquiry",
-    " Custome Aari Work Desing",
-    " Blouse Stitching",
-    "price Details",
-    "Facing error",
+    " Bridal Makeup",
+    " Facial Treatment",
+    "Product details"
 
   ];
 
@@ -330,13 +329,15 @@ function ContactPage() {
       <div className="w-full rounded-xl overflow-hidden shadow-lg">
   <iframe
     className="w-full h-[400px]"
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d96748.70532602348!2d-74.26447498949847!3d40.73128820161317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25370329a0e1d%3A0xe1bcdc2adcfee473!2sNewark%2C%20NJ%2C%20USA!5e0!3m2!1sen!2sin!4v1780121038563!5m2!1sen!2sin"
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d248756.07885882704!2d80.20867324999999!3d13.04752545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5265ea4f7d3361%3A0x6e61a70b6863d433!2sChennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1780747509158!5m2!1sen!2sin"
     style={{ border: 0 }}
     allowFullScreen
     loading="lazy"
     referrerPolicy="no-referrer-when-downgrade"
     title="Store Location"
   />
+
+  
 </div>
        
       </div>

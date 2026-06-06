@@ -2,6 +2,8 @@ import React from "react";
 import { motion } from "framer-motion";
 import braidal from "../images/intro.jpg"
 import studio from '../images/studio.jpg'
+import { Link } from "react-router-dom";
+
 
 import {
   Sparkles,
@@ -70,7 +72,9 @@ function Intro() {
               whileTap={{ scale: 0.95 }}
               className="mt-8 cursor-pointer bg-yellow-400 hover:bg-yellow-500 text-red-700 font-semibold px-8 py-4 rounded-full transition duration-300 shadow-xl"
             >
-              Explore Now
+               <Link 
+              to="/services" >Explore Now</Link>  
+              
             </motion.button>
           </div>
         </div>
@@ -121,12 +125,14 @@ function Intro() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
             >
-              <button className="bg-yellow-400 hover:bg-yellow-500 text-red-700 px-8 py-4 rounded-full text-lg font-semibold shadow-lg transition duration-300">
-                Contact
+              <button className="cursor-pointer bg-yellow-400 hover:bg-yellow-500 text-red-700 px-8 py-4 rounded-full text-lg font-semibold shadow-lg transition duration-300">
+                <Link 
+              to="/contact" >Contact</Link>
               </button>
 
               <button className="border-2 border-yellow-300 text-yellow-300 hover:bg-yellow-300 hover:text-red-700 px-8 py-4 rounded-full text-lg font-semibold transition duration-300">
-                Explore Services
+             <Link 
+              to="/services" >Explore Services</Link>   
               </button>
             </motion.div>
           </motion.div>

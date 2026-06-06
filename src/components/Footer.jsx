@@ -17,6 +17,13 @@ function Footer() {
     });
   };
 
+  const handleNavigation = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};
+
   return (
     <footer className="relative overflow-hidden bg-gradient-to-b from-red-900 via-red-800 to-red-950 text-white">
       {/* Background Effects */}
@@ -63,7 +70,7 @@ function Footer() {
             <ul className="mt-5 space-y-3 text-white/70 text-sm sm:text-base">
               <li>
                 <Link
-                  to="/"
+                  to="/" onClick={handleNavigation}
                   className="hover:text-yellow-300 transition duration-300"
                 >
                   Home
@@ -71,7 +78,7 @@ function Footer() {
               </li>
 
               <li>
-                <Link
+                <Link onClick={handleNavigation}
                   to="/about"
                   className="hover:text-yellow-300 transition duration-300"
                 >
@@ -80,7 +87,7 @@ function Footer() {
               </li>
 
               <li>
-                <Link
+                <Link onClick={handleNavigation}
                   to="/services"
                   className="hover:text-yellow-300 transition duration-300"
                 >
@@ -89,7 +96,7 @@ function Footer() {
               </li>
 
               <li>
-                <Link
+                <Link onClick={handleNavigation}
                   to="/contact"
                   className="hover:text-yellow-300 transition duration-300"
                 >
@@ -111,21 +118,50 @@ function Footer() {
             </h3>
 
             <ul className="mt-5 space-y-3 text-white/70 text-sm sm:text-base">
-              <li className="hover:text-yellow-300 transition cursor-pointer">
-                Bridal Makeup
-              </li>
-              <li className="hover:text-yellow-300 transition cursor-pointer">
-                Hair Styling
-              </li>
-              <li className="hover:text-yellow-300 transition cursor-pointer">
-                Facial Care
-              </li>
-              <li className="hover:text-yellow-300 transition cursor-pointer">
-                Spa Therapy
-              </li>
-              <li className="hover:text-yellow-300 transition cursor-pointer">
-                Nail Art
-              </li>
+            <li>
+  <Link onClick={handleNavigation}
+    to="/service/bridal-makeup"
+    className="hover:text-yellow-300 transition"
+  >
+    Bridal Makeup
+  </Link>
+</li>
+
+<li>
+  <Link onClick={handleNavigation}
+    to="/service/hair-styling"
+    className="hover:text-yellow-300 transition"
+  >
+    Hair Styling
+  </Link>
+</li>
+
+<li>
+  <Link onClick={handleNavigation}
+    to="/service/facial-treatment"
+    className="hover:text-yellow-300 transition"
+  >
+    Facial Care
+  </Link>
+</li>
+
+<li>
+  <Link onClick={handleNavigation}
+    to="/service/spa-therapy"
+    className="hover:text-yellow-300 transition"
+  >
+    Spa Therapy
+  </Link>
+</li>
+
+<li>
+  <Link onClick={handleNavigation}
+    to="/service/nail-care"
+    className="hover:text-yellow-300 transition"
+  >
+    Nail Art
+  </Link>
+</li>
             </ul>
           </motion.div>
 
@@ -146,7 +182,11 @@ function Footer() {
                   size={18}
                   className="text-yellow-300 mt-1 flex-shrink-0"
                 />
-                <p>+765-555-2417</p>
+                
+                <a href="tel:8668108891" className="hover:text-yellow-300 transition">
+  91+ 8668108891
+</a>
+
               </div>
 
               <div className="flex items-start justify-center sm:justify-start gap-3 break-all">

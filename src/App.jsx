@@ -7,11 +7,15 @@ import Services from "./pages/Services";
 import ContactPage from "./pages/ContactPage";
 import ServiceDetails from "./pages/ServiceDetails"; // ADD THIS
 import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <>
+    <ScrollToTop />
     <Routes>
+       
+
       <Route path="/" element={<Home />} />
 
       <Route path="/about" element={<About />} />
