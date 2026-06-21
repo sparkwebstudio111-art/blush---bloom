@@ -182,3 +182,23 @@
     border-right-color: var(--border);
   }
 }
+
+/* ================= Swiper Dots ================= */
+
+.swiper-pagination {
+  margin-top: 30px !important;
+  position: relative !important;
+}
+
+.swiper-pagination-bullet {
+  width: 12px !important;
+  height: 12px !important;
+  background-color: white !important;
+  opacity: 0.5 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #facc15 !important;
+  opacity: 1 !important;
+  transform: scale(1.3);
+}

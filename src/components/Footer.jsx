@@ -1,6 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+
+import logo from "../images/spark.png"; 
 import {
   Phone,
   Mail,
@@ -25,9 +27,9 @@ function Footer() {
 };
 
   return (
-    <footer className="relative overflow-hidden bg-gradient-to-b from-red-900 via-red-800 to-red-950 text-white">
+    <footer className="relative overflow-hidden bg-black text-white">
       {/* Background Effects */}
-      <div className="absolute top-0 left-0 w-72 h-72 bg-pink-500/20 blur-3xl rounded-full"></div>
+      <div className="absolute top-0 left-0 w-72 h-72 bg-yellow-500/20 blur-3xl rounded-full"></div>
       <div className="absolute bottom-0 right-0 w-72 h-72 bg-yellow-400/10 blur-3xl rounded-full"></div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-12 sm:py-16">
@@ -56,114 +58,123 @@ function Footer() {
             </div>
           </motion.div>
 
-          {/* Quick Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1, duration: 0.6 }}
-          >
-            <h3 className="text-xl sm:text-2xl font-semibold text-yellow-300">
-              Quick Links
-            </h3>
+{/* Quick Links */}
+<motion.div
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ delay: 0.1, duration: 0.6 }}
+>
+  <h3 className="text-xl sm:text-2xl font-semibold text-yellow-300">
+    Quick Links
+  </h3>
 
-            <ul className="mt-5 space-y-3 text-white/70 text-sm sm:text-base">
-              <li>
-                <Link
-                  to="/" onClick={handleNavigation}
-                  className="hover:text-yellow-300 transition duration-300"
-                >
-                  Home
-                </Link>
-              </li>
+  <ul className="mt-5 space-y-3 text-white/70 text-sm sm:text-base">
+    <li>
+      <Link
+        to="/"
+        onClick={handleNavigation}
+        className="hover:text-yellow-300 transition duration-300"
+      >
+        Home
+      </Link>
+    </li>
 
-              <li>
-                <Link onClick={handleNavigation}
-                  to="/about"
-                  className="hover:text-yellow-300 transition duration-300"
-                >
-                  About
-                </Link>
-              </li>
+    <li>
+      <Link
+        to="/about"
+        onClick={handleNavigation}
+        className="hover:text-yellow-300 transition duration-300"
+      >
+        About
+      </Link>
+    </li>
 
-              <li>
-                <Link onClick={handleNavigation}
-                  to="/services"
-                  className="hover:text-yellow-300 transition duration-300"
-                >
-                  Services
-                </Link>
-              </li>
+    <li>
+      <Link
+        to="/services"
+        onClick={handleNavigation}
+        className="hover:text-yellow-300 transition duration-300"
+      >
+        Services
+      </Link>
+    </li>
 
-              <li>
-                <Link onClick={handleNavigation}
-                  to="/contact"
-                  className="hover:text-yellow-300 transition duration-300"
-                >
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </motion.div>
+    <li>
+      <Link
+        to="/contact"
+        onClick={handleNavigation}
+        className="hover:text-yellow-300 transition duration-300"
+      >
+        Contact
+      </Link>
+    </li>
+  </ul>
+</motion.div>
 
-          {/* Services */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-          >
-            <h3 className="text-xl sm:text-2xl font-semibold text-yellow-300">
-              Services
-            </h3>
+{/* Services */}
+<motion.div
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ delay: 0.2, duration: 0.6 }}
+>
+  <h3 className="text-xl sm:text-2xl font-semibold text-yellow-300">
+    Services
+  </h3>
 
-            <ul className="mt-5 space-y-3 text-white/70 text-sm sm:text-base">
-            <li>
-  <Link onClick={handleNavigation}
-    to="/service/bridal-makeup"
-    className="hover:text-yellow-300 transition"
-  >
-    Bridal Makeup
-  </Link>
-</li>
+  <ul className="mt-5 space-y-3 text-white/70 text-sm sm:text-base">
+    <li>
+      <Link
+        to="/services/bridal-makeup"
+        onClick={handleNavigation}
+        className="hover:text-yellow-300 transition duration-300"
+      >
+        Bridal Makeup
+      </Link>
+    </li>
 
-<li>
-  <Link onClick={handleNavigation}
-    to="/service/hair-styling"
-    className="hover:text-yellow-300 transition"
-  >
-    Hair Styling
-  </Link>
-</li>
+    <li>
+      <Link
+        to="/services/hair-styling"
+        onClick={handleNavigation}
+        className="hover:text-yellow-300 transition duration-300"
+      >
+        Hair Styling
+      </Link>
+    </li>
 
-<li>
-  <Link onClick={handleNavigation}
-    to="/service/facial-treatment"
-    className="hover:text-yellow-300 transition"
-  >
-    Facial Care
-  </Link>
-</li>
+    <li>
+      <Link
+        to="/services/facial-treatment"
+        onClick={handleNavigation}
+        className="hover:text-yellow-300 transition duration-300"
+      >
+        Facial Care
+      </Link>
+    </li>
 
-<li>
-  <Link onClick={handleNavigation}
-    to="/service/spa-therapy"
-    className="hover:text-yellow-300 transition"
-  >
-    Spa Therapy
-  </Link>
-</li>
+    <li>
+      <Link
+        to="/services/spa-therapy"
+        onClick={handleNavigation}
+        className="hover:text-yellow-300 transition duration-300"
+      >
+        Spa Therapy
+      </Link>
+    </li>
 
-<li>
-  <Link onClick={handleNavigation}
-    to="/service/nail-care"
-    className="hover:text-yellow-300 transition"
-  >
-    Nail Art
-  </Link>
-</li>
-            </ul>
-          </motion.div>
+    <li>
+      <Link
+        to="/services/nail-care"
+        onClick={handleNavigation}
+        className="hover:text-yellow-300 transition duration-300"
+      >
+        Nail Art
+      </Link>
+    </li>
+  </ul>
+</motion.div>
 
           {/* Contact */}
           <motion.div
@@ -194,7 +205,7 @@ function Footer() {
                   size={18}
                   className="text-yellow-300 mt-1 flex-shrink-0"
                 />
-                <p>blushandbloom@gmail.com</p>
+                <p>sparkwebstudio111@gmail.com</p>
               </div>
 
               <div className="flex items-start justify-center sm:justify-start gap-3">
@@ -202,7 +213,7 @@ function Footer() {
                   size={18}
                   className="text-yellow-300 mt-1 flex-shrink-0"
                 />
-                <p>Newark, USA</p>
+                <p>Chennai, India</p>
               </div>
             </div>
           </motion.div>
@@ -218,22 +229,77 @@ function Footer() {
 
             <p className="text-white/50 text-xs mt-2">
               Designed & Developed by
-              <span className="text-yellow-300 font-semibold ml-1">
-                Spark Web Studio
-              </span>
+              <motion.a
+  href="https://sparkwebstudio111.digital/"
+  target="_blank"
+  rel="noopener noreferrer"
+  initial={{ opacity: 0, y: 10 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  whileHover={{ scale: 1.05, y: -2 }}
+  whileTap={{ scale: 0.97 }}
+  transition={{ duration: 0.3 }}
+  className="ml-1 inline-flex items-center gap-2 font-semibold text-yellow-300 transition-all duration-300 hover:text-yellow-400"
+>
+  <span>Spark Web Studio</span>
+
+  <motion.img
+    src={logo}
+    alt="Spark Web Studio Logo"
+    className="h-6 w-6 object-contain"
+    animate={{
+      rotate: [0, 8, -8, 0],
+      scale: [1, 1.08, 1],
+    }}
+    transition={{
+      duration: 2,
+      repeat: Infinity,
+      ease: "easeInOut",
+    }}
+  />
+</motion.a>
             </p>
           </div>
 
-          {/* Small Back To Top Button */}
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={scrollToTop}
-            className="flex items-center gap-1 bg-yellow-400 text-red-700 px-3 py-1.5 rounded-full text-xs sm:text-sm font-semibold shadow-md"
-          >
-            <ArrowUp size={12} />
-            Top
-          </motion.button>
+         <motion.button
+  onClick={scrollToTop}
+  whileHover={{
+    scale: 1.08,
+    y: -3,
+  }}
+  whileTap={{ scale: 0.95 }}
+  animate={{
+    y: [0, -4, 0],
+  }}
+  transition={{
+    y: {
+      duration: 2.5,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
+  }}
+  className="
+    group relative overflow-hidden
+    flex items-center gap-2
+    rounded-full
+    border border-yellow-400/30
+    bg-white/5 backdrop-blur-xl
+    px-4 py-2
+    text-sm font-medium text-white
+    shadow-[0_0_25px_rgba(250,204,21,0.15)]
+    transition-all duration-300
+  "
+>
+  {/* Glow Effect */}
+  <span className="absolute inset-0 bg-gradient-to-r from-yellow-500/10 via-yellow-300/20 to-yellow-500/10 opacity-0 group-hover:opacity-100 transition duration-500" />
+
+  {/* Icon */}
+  <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-yellow-300 to-yellow-500 text-black shadow-lg">
+    <ArrowUp size={16} />
+  </span>
+
+  {/* Text */}
+  <span className="relative">Back to Top</span>
+</motion.button>
         </div>
       </div>
     </footer>

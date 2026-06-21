@@ -145,79 +145,85 @@ function ServiceDetails() {
   }
 
   return (
-    <div className="bg-gradient-to-b from-white to-red-50 min-h-screen">
-      <Navbar />
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#050505] via-[#111111] to-[#1a1a1a] text-white">
+  {/* Background Glow */}
+  <div className="absolute inset-0 overflow-hidden">
+    <div className="absolute -top-40 left-1/2 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-yellow-500/10 blur-[180px]" />
+    <div className="absolute bottom-0 right-0 h-[350px] w-[350px] rounded-full bg-yellow-400/5 blur-[150px]" />
+    <div className="absolute top-1/2 -left-32 h-[300px] w-[300px] rounded-full bg-yellow-300/5 blur-[120px]" />
+  </div>
 
-      {/* Back Button */}
-      <Link
-        to="/services"
-        className="fixed top-24 left-4 z-50 bg-white shadow-xl p-3 rounded-full hover:bg-red-700 hover:text-white transition-all duration-300"
-      >
-        <ArrowLeft size={22} />
-      </Link>
+  {/* Back Button */}
+  <Link
+    to="/services"
+    className="fixed left-5 top-24 z-50 flex h-12 w-12 items-center justify-center rounded-full border border-yellow-500/30 bg-black/60 text-yellow-400 backdrop-blur-xl transition-all duration-300 hover:scale-110 hover:bg-yellow-500 hover:text-black"
+  >
+    <ArrowLeft size={22} />
+  </Link>
 
-      <section className="pt-28 pb-20 px-5 max-w-7xl mx-auto">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-14"
-        >
-          <h1 className="text-4xl md:text-6xl font-black text-gray-900">
-            {service.title}
-          </h1>
+  <section className="relative z-10 mx-auto max-w-7xl px-5 pb-24 pt-32">
+    {/* Header */}
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      className="mb-20 text-center"
+    >
+      <p className="mb-3 uppercase tracking-[0.4em] text-yellow-400">
+        Premium Beauty Service
+      </p>
 
-          <div className="w-32 h-1 bg-red-700 mx-auto rounded-full mt-4" />
+      <h1 className="text-5xl font-serif md:text-7xl">
+        {service.title}
+      </h1>
 
-          <p className="max-w-3xl mx-auto mt-6 text-gray-600 text-lg leading-relaxed">
-            {service.description}
-          </p>
-        </motion.div>
+      <div className="mx-auto mt-6 h-[2px] w-40 bg-gradient-to-r from-transparent via-yellow-400 to-transparent" />
 
-        {/* Premium Masonry Gallery */}
-    <div className="columns-2 md:columns-3 xl:columns-4 gap-5 space-y-5">
+      <p className="mx-auto mt-8 max-w-3xl text-lg leading-8 text-gray-400">
+        {service.description}
+      </p>
+    </motion.div>
+
+    
+   {/* Gallery */}
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 lg:gap-6">
   {service.gallery.map((img, index) => (
     <motion.div
       key={index}
-      initial={{ opacity: 0, y: 80 }}
+      initial={{ opacity: 0, y: 60 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      viewport={{
+  once: true,
+  amount: 0.15,
+}}
       transition={{
-        duration: 0.8,
+        duration: 0.6,
         delay: index * 0.08,
       }}
       whileHover={{
-        y: -12,
-        scale: 1.03,
+        y: -8,
       }}
-      whileTap={{ scale: 0.98 }}
-      className="relative overflow-hidden rounded-3xl shadow-xl cursor-pointer break-inside-avoid group"
+      className="group relative overflow-hidden rounded-[24px] border border-yellow-500/20 bg-white/5 shadow-[0_20px_50px_rgba(0,0,0,0.35)] backdrop-blur-xl"
     >
       <img
         src={img}
         alt={service.title}
-        className={`w-full object-cover transition-all duration-700 group-hover:scale-110 ${
-          index % 4 === 0
-            ? "h-[520px]"
-            : index % 3 === 0
-            ? "h-[420px]"
-            : index % 2 === 0
-            ? "h-[350px]"
-            : "h-[280px]"
-        }`}
+        className="h-[260px] sm:h-[300px] md:h-[320px] lg:h-[340px] w-full object-cover transition-all duration-700 group-hover:scale-110"
       />
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-500" />
 
-      <div className="absolute top-0 -left-[150%] h-full w-[45%] bg-white/30 skew-x-12 group-hover:left-[200%] transition-all duration-1000" />
+      {/* Luxury Shine */}
+      <div className="absolute top-0 -left-[150%] h-full w-[35%] skew-x-12 bg-white/20 transition-all duration-1000 group-hover:left-[180%]" />
 
-      <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-24 group-hover:translate-y-0 transition-all duration-500">
-        <h3 className="text-white font-bold text-xl">
+      {/* Text */}
+      <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-0 sm:translate-y-20 sm:group-hover:translate-y-0 transition-all duration-500">
+        <h3 className="text-lg sm:text-xl font-semibold text-white">
           {service.title}
         </h3>
 
-        <p className="text-white/80 text-sm mt-1">
+        <p className="mt-1 text-xs sm:text-sm tracking-[0.2em] text-yellow-300 uppercase">
           Luxury Beauty Experience
         </p>
       </div>
@@ -225,31 +231,32 @@ function ServiceDetails() {
   ))}
 </div>
 
-        {/* CTA Section */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="text-center mt-20"
-        >
-          <h2 className="text-3xl font-bold text-gray-900">
-            Ready for Your Transformation?
-          </h2>
+  {/* CTA */}
+<motion.div
+  initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, amount: 0.2 }}
+  transition={{ duration: 0.8 }}
+  className="mt-14 sm:mt-20 lg:mt-24 rounded-[24px] sm:rounded-[35px] border border-yellow-500/20 bg-white/5 px-5 py-8 sm:px-8 sm:py-10 lg:p-12 text-center backdrop-blur-xl"
+>
+  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-white leading-tight">
+    Ready for Your Transformation?
+  </h2>
 
-          <p className="mt-4 text-gray-600">
-            Book your appointment today and experience premium beauty care.
-          </p>
+  <p className="mx-auto mt-4 sm:mt-5 max-w-2xl text-sm sm:text-base lg:text-lg leading-7 text-gray-400">
+    Experience premium beauty care with expert professionals and luxury
+    treatments tailored just for you.
+  </p>
 
-          <Link
-            to="/contact"
-            className="inline-block mt-8 bg-red-700 hover:bg-red-800 text-white px-8 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-red-300 transition-all duration-300"
-          >
-            Book Appointment
-          </Link>
-        </motion.div>
-      </section>
-    </div>
+  <Link
+    to="/contact"
+    className="mt-6 sm:mt-8 lg:mt-10 inline-flex items-center justify-center rounded-full bg-yellow-400 px-6 py-3 sm:px-8 sm:py-4 lg:px-10 font-semibold text-black transition-all duration-300 hover:scale-105 hover:bg-yellow-300 text-sm sm:text-base"
+  >
+    Book Appointment
+  </Link>
+</motion.div>
+  </section>
+</div>
   );
 }
 

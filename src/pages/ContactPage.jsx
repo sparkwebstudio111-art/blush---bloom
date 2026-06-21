@@ -1,369 +1,354 @@
-import React, { useState } from 'react'
-import { contactPageStyles } from "../assets/style"
-import { Clock, IndianRupee, Mail, Phone, Send, ShoppingCart, User, AlertCircle  } from "lucide-react"
-import Navbar from '../components/Navbar';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import {
+  Phone,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Clock3,
+  Send,
+} from "lucide-react";
 
-function InputWithIcon({
-  icon,
-  label,
-  name,
-  value,
-  onChange,
-  placeholder,
-  error,
-  required,
-}) {
-  return (
-    <label className="block">
-      <span className={contactPageStyles.inputLabel}>
-        {label}{" "}
-        {required && <span className={contactPageStyles.requiredStar}>*</span>}
-      </span>
-      <div className={contactPageStyles.inputContainer}>
-        <div className={contactPageStyles.inputIconContainer}>{icon}</div>
-        <input
-          name={name}
-          value={value}
-          onChange={onChange}
-          placeholder={placeholder}
-          required={required}
-          className={`${contactPageStyles.inputBase} ${error ? contactPageStyles.inputError : contactPageStyles.inputNormal
-            }`}
-        />
-      </div>
-      {error && (
-        <p className={contactPageStyles.errorMessage}>
-          <AlertCircle className="w-3 h-3" />
-          {error}
-        </p>
-      )}
-    </label>
-  );
-}
+import contatimg from "../images/background.png"
 
-// Select with icon
-function SelectWithIcon({
-  icon,
-  label,
-  name,
-  value,
-  onChange,
-  options = [],
-  error,
-  required,
-}) {
-  return (
-    <label className="block">
-      <span className={contactPageStyles.inputLabel}>
-        {label}{" "}
-        {required && <span className={contactPageStyles.requiredStar}>*</span>}
-      </span>
-      <div className={contactPageStyles.inputContainer}>
-        <div className={contactPageStyles.inputIconContainer}>{icon}</div>
-        <select
-          name={name}
-          value={value}
-          onChange={onChange}
-          required={required}
-          className={`${contactPageStyles.inputBase} ${error ? contactPageStyles.inputError : contactPageStyles.inputNormal
-            }`}
-        >
-          {options.map((o) => (
-            <option key={o} value={o}>
-              {o}
-            </option>
-          ))}
-        </select>
-      </div>
-    </label>
-  );
-}
-
-// Creative card used on right side
-function CreativeCard({
-  title,
-  subtitle,
-  icon,
-  ctaText,
-  ctaOnClick,
-  accent = "amber",
-}) {
-  // accent controls small color variants
-  const accentBg =
-    accent === "indigo"
-      ? contactPageStyles.accentIndigo
-      : contactPageStyles.accentAmber;
-  const buttonClass =
-    accent === "indigo"
-      ? contactPageStyles.buttonIndigo
-      : contactPageStyles.buttonAmber;
-
-  return (
-    <div className={`${contactPageStyles.creativeCardBase} ${accentBg}`}>
-      <div className="flex items-start gap-4">
-        <div className={contactPageStyles.creativeCardIconContainer}>
-          {icon}
-        </div>
-        <div className="flex-1">
-          <div
-            className={contactPageStyles.creativeCardTitle}
-            style={{ fontFamily: "'Playfair Display', serif" }}
-          >
-            {title}
-          </div>
-          <p className={contactPageStyles.creativeCardSubtitle}>{subtitle}</p>
-        </div>
-      </div>
-
-      <div className="mt-4">
-        <button
-          onClick={ctaOnClick}
-          className={`${contactPageStyles.creativeCardButtonBase} ${buttonClass}`}
-        >
-          {ctaText}
-        </button>
-      </div>
-    </div>
-  );
-}
-
+import contactBg from "../images/mblBackground.jpeg"; // <-- Your fixed background image
 
 function ContactPage() {
+  const [formData, setFormData] = useState({
+  name: "",
+  email: "",
+  phone: "",
+  message: "",
+});
 
-  const WHATSAPP_NUMBER = "8668108891";
+const [errors, setErrors] = useState({});
 
-  const initialForm = {
+const whatsappNumber = "8668108891"; // Your WhatsApp Number
+
+const handleChange = (e) => {
+  setFormData({
+    ...formData,
+    [e.target.name]: e.target.value,
+  });
+
+  setErrors({
+    ...errors,
+    [e.target.name]: "",
+  });
+};
+
+const validate = () => {
+  const newErrors = {};
+
+  if (!formData.name.trim()) {
+    newErrors.name = "Full Name is required.";
+  }
+
+  if (!formData.email.trim()) {
+    newErrors.email = "Email is required.";
+  } else if (
+    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)
+  ) {
+    newErrors.email = "Enter a valid email address.";
+  }
+
+  if (!formData.phone.trim()) {
+    newErrors.phone = "Phone Number is required.";
+  } else if (!/^[0-9]{10}$/.test(formData.phone)) {
+    newErrors.phone = "Phone Number must contain 10 digits.";
+  }
+
+  if (!formData.message.trim()) {
+    newErrors.message = "Message is required.";
+  }
+
+  setErrors(newErrors);
+
+  return Object.keys(newErrors).length === 0;
+};
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+
+  if (!validate()) return;
+
+  const whatsappMessage = `*New Contact Form Submission*
+
+👤 Name: ${formData.name}
+
+📧 Email: ${formData.email}
+
+📱 Phone: ${formData.phone}
+
+📝 Message:
+${formData.message}`;
+
+ const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+  whatsappMessage
+)}`;
+
+  window.open(url, "_blank");
+
+  setFormData({
     name: "",
     email: "",
     phone: "",
-    product: "General Inquiry",
-    budget: "",
-    contactMethod: "WhatsApp",
     message: "",
-  };
+  });
 
-  const [form, setForm] = useState(initialForm);
-  const [errors, setErrors] = useState({});
-  const [sending, setSending] = useState(false);
-  const [toast, setToast] = useState(null);
-
-  const products = [
-    "General Inquiry",
-    " Bridal Makeup",
-    " Facial Treatment",
-    "Product details"
-
-  ];
-
-  // show toast
-  function showToast(text, kind = "info", duration = 1800) {
-    setToast({ text, kind });
-    setTimeout(() => setToast(null), duration);
-  }
-
-  // strict validation: all fields required
-  function validate() {
-    const e = {};
-    if (!form.name.trim()) e.name = "Name is required";
-    if (!form.email.trim()) e.email = "Email is required";
-    else if (!/^\S+@\S+\.\S+$/.test(form.email)) e.email = "Email is invalid";
-    if (!form.phone.trim()) e.phone = "Phone is required";
-    if (!form.product.trim()) e.product = "Select product";
-    if (!form.budget.trim()) e.budget = "Budget is required";
-    if (!form.contactMethod.trim()) e.contactMethod = "Select contact method";
-    if (!form.message.trim()) e.message = "Message is required";
-    return e;
-  }
-
-  function handleSubmit(ev) {
-    ev.preventDefault();
-    const e = validate();
-    setErrors(e);
-    if (Object.keys(e).length > 0) {
-      showToast("Please fill all required fields", "error");
-      return;
-    }
-
-    setSending(true);
-
-    // Build WhatsApp message (formatted)
-    const message =
-      `Hello! I am *${form.name}*.\n\n` +
-      `*Interest:* ${form.product}\n` +
-      `*Budget:* ${form.budget}\n` +
-      `*Phone:* ${form.phone}\n` +
-      `*Email:* ${form.email}\n` +
-      `*Preferred Contact:* ${form.contactMethod}\n\n` +
-      `*Message:* ${form.message}`;
-
-    const url = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(
-      message
-    )}`;
-
-    showToast("Opening WhatsApp...", "success", 900);
-
-    setTimeout(() => {
-      window.open(url, "_blank");
-      clearForm();
-      setSending(false);
-      showToast("Submitted — form cleared", "success", 1600);
-    }, 700);
-  }
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((s) => ({
-      ...s,
-      [name]: value,
-    }));
-    setErrors((s) => ({
-      ...s,
-      [name]: undefined,
-    }))
-  }
-
-  //to clear
-
-  function clearForm() {
-    setForm(initialForm);
-    setErrors({});
-  }
-
+  setErrors({});
+};
   return (
-    <div>
-      <Navbar />
+    <div className="relative min-h-screen overflow-hidden  text-white">
+      {/* Fixed Background */}
+     {/* Desktop Background */}
+<div
+  className="fixed inset-0 -z-20 hidden sm:block bg-cover bg-center bg-no-repeat"
+  style={{
+    backgroundImage: `url(${contatimg})`,
+  }}
+/>
 
-<div className='min-h-screen bg-red-700 flex justify-center'>
-      <div className={contactPageStyles.pageContainer}>
-        <div className={contactPageStyles.innerContainer}>
-          <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg  py-10 relative overflow-hidden">
-            <h1 className="md:text-3xl text-2xl font-semibold  text-center mb-2">
-              Contact us
-            </h1>
-            <p className='text-center text-sm text-yellow-700  mb-6' >We will reach you with in 12 hours</p>
+{/* Mobile Background */}
+<div
+  className="fixed inset-0 -z-20 block sm:hidden bg-cover bg-center bg-no-repeat"
+  style={{
+    backgroundImage: `url(${contactBg})`,
+  }}
+/>
 
+      {/* Dark Overlay */}
+      <div className="fixed inset-0 -z-10 bg-gradient-to-b from-black/15 via-black/80 to-black/40 " />
 
-            <div className={contactPageStyles.mainGrid}>
-              <div className={contactPageStyles.leftColumn}>
-                <div className={contactPageStyles.formCard}>
-                  <form onSubmit={handleSubmit} className={contactPageStyles.form} >
-                    <div className={contactPageStyles.inputGrid} >
-                      <InputWithIcon icon={<User />} label={"Your Name"} name="name" value={form.name} onChange={handleChange} placeholder="Full Name" error={errors.name}
-                        required
-                      />
-                      <InputWithIcon icon={<Mail />} label="Email Address" name="email" value={form.email} onChange={handleChange} placeholder="your@gmail.com" error={errors.email}
-                        required
-                      />
-                    </div>
+      {/* Decorative Glow */}
+      <div className="absolute left-0 top-20 h-80 w-80 rounded-full bg-yellow-500/10 blur-[120px]" />
+      <div className="absolute right-0 bottom-20 h-96 w-96 rounded-full bg-yellow-400/10 blur-[150px]" />
 
-                    <div className={contactPageStyles.inputGrid}>
-                      <InputWithIcon icon={<Phone />} label="Phone" name="phone" value={form.phone} onChange={handleChange} placeholder="91+" error={errors.phone}
-                        required
-                      />
+      <section className="mx-auto max-w-7xl px-0 sm:px-25 py-24 lg:px-10">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mx-auto max-w-3xl text-center"
+        >
+          <span className="rounded-full border border-yellow-500/30 bg-yellow-500/10 px-5 py-2 text-xs font-semibold uppercase tracking-[4px] text-yellow-400">
+            Contact Us
+          </span>
 
-                      <SelectWithIcon icon={<Clock className="w-5  h-5 text-black" />}
-                        label="Preffered Contact" name="contactMethod" value={form.contactMethod} onChange={handleChange} options={["Whatsapp", "Phonecall", "Email"]} error={errors.contactMethod} required
-                      />
-                    </div>
+          <h1 className="mt-7 text-4xl font-bold leading-tight md:text-6xl">
+            We'd Love To
+            <span className="block bg-gradient-to-r from-yellow-300 via-yellow-500 to-yellow-200 bg-clip-text text-transparent">
+              Hear From You
+            </span>
+          </h1>
 
-                    <div>
-                      <SelectWithIcon icon={<ShoppingCart className="w-5  h-5 text-black" />}
-                                            label="Product of interest " name="product" value={form.product} onChange={handleChange} options={products} error={errors.product} required
-                                        />
-                    </div>
+          <p className="mt-6 text-base leading-8 text-gray-300 md:text-lg">
+            Whether you're booking an appointment, asking a question, or
+            planning your bridal makeover, our team is always ready to assist
+            you.
+          </p>
+        </motion.div>
 
+        {/* Main Section */}
+        <div className="mt-20 grid gap-10 lg:grid-cols-2">
+          {/* Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, x: -80 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="rounded-[35px] border border-white/10 bg-white/5 p-8 backdrop-blur-xl shadow-[0_20px_80px_rgba(0,0,0,0.5)]"
+          >
+            <h2 className="mb-8 text-3xl font-bold text-yellow-400">
+              Send a Message
+            </h2>
 
-                    <div className={contactPageStyles.inputGrid}>
+         <form onSubmit={handleSubmit} className="space-y-6">
+  {/* Name */}
+  <div>
+    <input
+      type="text"
+      name="name"
+      placeholder="Full Name"
+      value={formData.name}
+      onChange={handleChange}
+      className="w-full rounded-xl border border-white/10 bg-black/30 px-5 py-4 text-white outline-none transition-all duration-300 focus:border-yellow-500"
+    />
 
-                      <InputWithIcon icon={<IndianRupee />} className="w-5 h-5 text-green-600" label="Estimated budget" name="budget" value={form.budget} onChange={handleChange} placeholder="e.g ₹ 2,500" error={errors.budget}
-                        required
-                      />
+    {errors.name && (
+      <p className="mt-2 text-sm text-red-400">{errors.name}</p>
+    )}
+  </div>
 
-                      <div >
-                        <label className={contactPageStyles.inputLabel}>
-                          Your Message{" "}
-                          <span className={contactPageStyles.requiredStar}> *</span>
-                        </label>
-                        <textarea name='message' value={form.message} onChange={handleChange} rows={4} className={`${contactPageStyles.textareaContainer} ${errors.message ? contactPageStyles.inputError : contactPageStyles.inputNormal}`}
-                          placeholder='Enter your message' required >
-                        </textarea>
-                      </div>
+  {/* Email */}
+  <div>
+    <input
+      type="email"
+      name="email"
+      placeholder="Email Address"
+      value={formData.email}
+      onChange={handleChange}
+      className="w-full rounded-xl border border-white/10 bg-black/30 px-5 py-4 text-white outline-none transition-all duration-300 focus:border-yellow-500"
+    />
 
-                    </div>
+    {errors.email && (
+      <p className="mt-2 text-sm text-red-400">{errors.email}</p>
+    )}
+  </div>
 
-                     <div className={contactPageStyles.buttonsContainer}>
-                                        <button type='submit' disabled={sending} className={contactPageStyles.submitButton} >
-                                            <Send className="w-4 h-4" />
-                                            <span className='font-medium '>Send via WhatsApp</span>
-                                        </button>
-                                        <button type='button' onClick={() => {
-                                            clearForm();
-                                            showToast("Form Cleared", "info");
+  {/* Phone */}
+  <div>
+    <input
+      type="tel"
+      name="phone"
+      placeholder="Phone Number"
+      value={formData.phone}
+      onChange={handleChange}
+      maxLength={10}
+      className="w-full rounded-xl border border-white/10 bg-black/30 px-5 py-4 text-white outline-none transition-all duration-300 focus:border-yellow-500"
+    />
 
-                                        }} className={contactPageStyles.clearButton}>
-                                            clear
-                                        </button>
-                                    </div>
+    {errors.phone && (
+      <p className="mt-2 text-sm text-red-400">{errors.phone}</p>
+    )}
+  </div>
 
+  {/* Message */}
+  <div>
+    <textarea
+      rows="6"
+      name="message"
+      placeholder="Write your message..."
+      value={formData.message}
+      onChange={handleChange}
+      className="w-full resize-none rounded-xl border border-white/10 bg-black/30 px-5 py-4 text-white outline-none transition-all duration-300 focus:border-yellow-500"
+    />
 
-                  </form>
+    {errors.message && (
+      <p className="mt-2 text-sm text-red-400">{errors.message}</p>
+    )}
+  </div>
 
-                </div>
+  {/* Submit */}
+  <motion.button
+    type="submit"
+    whileHover={{ scale: 1.03 }}
+    whileTap={{ scale: 0.96 }}
+    className="flex w-full items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-yellow-400 to-yellow-600 px-6 py-4 font-semibold text-black transition-all duration-300 hover:shadow-[0_0_35px_rgba(250,204,21,0.45)]"
+  >
+    <Send size={18} />
+    Send Message
+  </motion.button>
+</form>
+          </motion.div>
 
-              </div>
-
-            <div className={contactPageStyles.rightColumn}>
-
-     <div className="py-10 px-4 text-center">
-
-      <h2 className="text-2xl md:text-3xl font-bold mb-6 [font-family:'Playfair_Display']">
-        Visit Our Store
-      </h2>
-
-      <p className="mb-6 text-gray-600 [font-family:'Poppins']">
-        We are located in Newark. Come visit us!
-      </p>
-
-      {/* Google Map */}
-      <div className="w-full max-w-4xl mx-auto rounded-xl overflow-hidden shadow-lg">
-      <div className="w-full rounded-xl overflow-hidden shadow-lg">
-  <iframe
-    className="w-full h-[400px]"
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d248756.07885882704!2d80.20867324999999!3d13.04752545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5265ea4f7d3361%3A0x6e61a70b6863d433!2sChennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1780747509158!5m2!1sen!2sin"
-    style={{ border: 0 }}
-    allowFullScreen
-    loading="lazy"
-    referrerPolicy="no-referrer-when-downgrade"
-    title="Store Location"
-  />
-
-  
-</div>
-       
+          {/* Contact Details */}
+          <motion.div
+  initial={{ opacity: 0, x: 80 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.8 }}
+  className="flex flex-col justify-center gap-4 sm:gap-5 lg:gap-6"
+>
+  {[
+    {
+      icon: <Phone className="h-6 w-6 sm:h-7 sm:w-7" />,
+      title: "Call Us",
+      value: "+91 8668108891",
+    },
+    {
+      icon: <Mail className="h-6 w-6 sm:h-7 sm:w-7" />,
+      title: "Email",
+      value: "contact@yoursalon.com",
+    },
+    {
+      icon: <MapPin className="h-6 w-6 sm:h-7 sm:w-7" />,
+      title: "Location",
+      value: "Your City, Tamil Nadu",
+    },
+    {
+      icon: <Clock3 className="h-6 w-6 sm:h-7 sm:w-7" />,
+      title: "Working Hours",
+      value: "Mon - Sun : 9:00 AM - 8:00 PM",
+    },
+  ].map((item, index) => (
+    <motion.div
+      key={index}
+      whileHover={{
+        y: -4,
+        scale: 1.01,
+        borderColor: "#facc15",
+      }}
+      transition={{ duration: 0.3 }}
+      className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-xl transition-all duration-300 sm:gap-5 sm:p-5 lg:rounded-3xl lg:p-6"
+    >
+      {/* Icon */}
+      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-yellow-500/15 text-yellow-400 sm:h-16 sm:w-16 sm:rounded-2xl">
+        {item.icon}
       </div>
 
-    </div>
+      {/* Content */}
+      <div className="min-w-0 flex-1">
+        <h3 className="text-lg font-semibold text-white sm:text-xl">
+          {item.title}
+        </h3>
 
-            </div>
+        <p className="mt-1 break-words text-sm leading-6 text-gray-300 sm:mt-2 sm:text-base">
+          {item.value}
+        </p>
+      </div>
+    </motion.div>
+  ))}
 
+  {/* Action Buttons */}
+  <div className="mt-2 flex flex-col gap-4 pt-4 sm:pt-6 md:flex-row">
+    <motion.a
+      whileHover={{ scale: 1.03 }}
+      whileTap={{ scale: 0.96 }}
+      href="tel:+918668108891"
+      className="flex w-full items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-yellow-400 to-yellow-600 px-5 py-4 text-sm font-semibold text-black shadow-lg transition-all duration-300 hover:shadow-yellow-500/30 sm:text-base md:flex-1"
+    >
+      <Phone className="h-5 w-5" />
+      Call Now
+    </motion.a>
 
-            </div>
-
-
-          
-
-
-          </div>
-
+    <motion.a
+      whileHover={{ scale: 1.03 }}
+      whileTap={{ scale: 0.96 }}
+      href="https://wa.me/918668108891"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex w-full items-center justify-center gap-3 rounded-xl border border-yellow-500 bg-yellow-500/10 px-5 py-4 text-sm font-semibold text-yellow-400 transition-all duration-300 hover:bg-yellow-500/20 md:flex-1 sm:text-base"
+    >
+      <MessageCircle className="h-5 w-5" />
+      WhatsApp
+    </motion.a>
+  </div>
+</motion.div>
         </div>
 
+        {/* Bottom Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 80 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2, duration: 0.8 }}
+          className="mt-24 rounded-[35px] border border-yellow-500/20 bg-gradient-to-r from-yellow-500/10 via-transparent to-yellow-500/10 p-10 text-center backdrop-blur-xl"
+        >
+          <h2 className="text-3xl font-bold text-yellow-400">
+            Beauty Begins With Confidence
+          </h2>
 
-      </div>
-
+          <p className="mx-auto mt-4 max-w-3xl text-gray-300">
+            Book your appointment today and experience premium beauty services
+            delivered with elegance, luxury, and personalized care.
+          </p>
+        </motion.div>
+      </section>
     </div>
-
-    </div>
-  )
+  );
 }
 
-export default ContactPage
+export default ContactPage;

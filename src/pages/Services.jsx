@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";  
+import { Link } from "react-router-dom";
 
 import {
   Sparkles,
@@ -8,7 +8,7 @@ import {
   Heart,
   Flower2,
   Crown,
- Brush,
+  Brush,
   ArrowUpRight,
 } from "lucide-react";
 
@@ -19,261 +19,171 @@ import spa from "../images/spa.jpg";
 import makeup from "../images/products.jpg";
 import nails from "../images/nails.jpg";
 
-import Navbar from "../components/Navbar";
-
 function Services() {
-  const services = [
-    {
-      id: "bridal-makeup",
-      title: "Bridal Makeup",
-      desc: "Luxury bridal makeup packages crafted for weddings and special ceremonies.",
-      image: bridal,
-      icon: <Crown size={22} />,
-    },
-    {
-      id: "hair-styling",
-      title: "Hair Styling",
-      desc: "Modern hairstyling and premium hair treatments for elegant looks.",
-      image: hair,
-      icon: <Scissors size={22} />,
-    },
-    {
-      id: "facial-treatment",
-      title: "Facial Treatment",
-      desc: "Professional skincare and glowing facial therapies.",
-      image: facial,
-      icon: <Sparkles size={22} />,
-    },
-    {
-      id: "spa-therapy",
-      title: "Spa Therapy",
-      desc: "Relaxing spa sessions designed to refresh body and mind.",
-      image: spa,
-      icon: <Flower2 size={22} />,
-    },
-    {
-      id: "party-makeup",
-      title: "Party Makeup",
-      desc: "Premium party makeup for receptions and celebrations.",
-      image: makeup,
-      icon: <Brush size={22} />,
-    },
-    {
-      id: "nail-care",
-      title: "Nail Care",
-      desc: "Stylish manicure and elegant nail art.",
-      image: nails,
-      icon: <Heart size={22} />,
-    },
-  ];
+ const services = [
+  {
+    id: "bridal-makeup",
+    title: "Bridal Makeover",
+    description: "Luxury bridal makeup...",
+    image: bridal,
+    icon: Crown,
+  },
+  {
+    id: "hair-styling",
+    title: "Hair Styling",
+    description: "Professional haircuts...",
+    image: hair,
+    icon: Scissors,
+  },
+  {
+    id: "facial-treatment",
+    title: "Facial Treatments",
+    description: "Deep cleansing facials...",
+    image: facial,
+    icon: Sparkles,
+  },
+  {
+    id: "spa-therapy",
+    title: "Spa & Wellness",
+    description: "Relax with luxurious body massages...",
+    image: spa,
+    icon: Heart,
+  },
+  {
+    id: "party-makeup",
+    title: "Professional Makeup",
+    description: "Party, engagement, reception...",
+    image: makeup,
+    icon: Brush,
+  },
+  {
+    id: "nail-care",
+    title: "Nail Studio",
+    description: "Elegant manicures and pedicures...",
+    image: nails,
+    icon: Flower2,
+  },
+];
 
   return (
-    <div className="bg-[#faf7f5] min-h-screen overflow-hidden">
-      <Navbar />
+    <section className="relative overflow-hidden bg-black py-24">
+      {/* Background Glow */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 left-1/2 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-yellow-500/10 blur-[150px]" />
+        <div className="absolute bottom-0 right-0 h-[350px] w-[350px] rounded-full bg-yellow-400/5 blur-[120px]" />
+      </div>
 
-      {/* HERO SECTION */}
-      <section className="relative px-5 sm:px-8 lg:px-20  pb-20">
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
+        {/* Heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true }}
+          className="mb-16 text-center"
+        >
+          <p className="mb-4 tracking-[0.35em] uppercase text-yellow-400 text-sm">
+            Premium Beauty Services
+          </p>
 
-        {/* BACKGROUND */}
-        <div className="absolute inset-0 overflow-hidden">
+          <h2 className="text-4xl md:text-6xl font-serif text-white">
+            Luxury Salon Experience
+          </h2>
 
-          <motion.div
-            animate={{
-              scale: [1, 1.2, 1],
-              rotate: [0, 30, 0],
-            }}
-            transition={{
-              duration: 12,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-red-200 rounded-full blur-3xl opacity-40"
-          />
+          <div className="mx-auto mt-6 h-[2px] w-28 bg-gradient-to-r from-transparent via-yellow-400 to-transparent" />
 
-          <motion.div
-            animate={{
-              scale: [1, 1.1, 1],
-              rotate: [0, -20, 0],
-            }}
-            transition={{
-              duration: 14,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="absolute top-20 right-0 w-[400px] h-[400px] bg-pink-200 rounded-full blur-3xl opacity-40"
-          />
-        </div>
+          <p className="mx-auto mt-8 max-w-2xl text-gray-400 leading-8">
+            Experience elegance and transformation with our premium beauty,
+            makeup, skincare, hair, spa, and nail services designed to enhance
+            your confidence.
+          </p>
+        </motion.div>
 
-        {/* CONTENT */}
-        <div className="relative z-10 max-w-6xl top-30 mx-auto flex justify-center items-center">
+        {/* Cards */}
+        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+          {services.map((service, index) => {
+            const Icon = service.icon;
 
-          {/* LEFT */}
-          <motion.div
-            initial={{ opacity: 0, x: -60 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{
-              duration: 1,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          >
-            <span className="bg-red-100 text-red-700  text-center px-4 py-2 rounded-full text-sm font-semibold tracking-wider">
-              BEAUTY • LUXURY • STYLE
-            </span>
-
-            <h1 className="mt-7 text-center text-5xl lg:text-7xl font-black leading-tight text-[#1a1a1a]">
-              Beauty
-              <span className="text-red-700 text-center"> Services</span>
-              <br />
-              With Modern Elegance
-            </h1>
-
-            <p className="mt-7 text-center text-gray-600 text-lg leading-relaxed ">
-              Discover luxury beauty experiences crafted with professionalism,
-              creativity, and timeless elegance for every special occasion.
-            </p>
-
-          
-          </motion.div>
-
-          {/* RIGHT IMAGE */}
-         
-        </div>
-      </section>
-
-      {/* SERVICES */}
-      <section className="px-5 sm:px-8 lg:px-20 py-5 pb-24">
-        <div className="max-w-7xl mx-auto">
-
-          {/* TITLE */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{
-              duration: 0.8,
-            }}
-            className="text-center mb-16"
-          >
-        
-          </motion.div>
-
-          {/* GRID */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-
-            {services.map((service, index) => (
+            return (
               <motion.div
                 key={index}
-                initial={{
-                  opacity: 0,
-                  y: 80,
-                }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                viewport={{
-                  once: true,
-                  amount: 0.2,
-                }}
+                initial={{ opacity: 0, y: 70 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{
-                  duration: 0.8,
-                  delay: index * 0.1,
-                  ease: [0.22, 1, 0.36, 1],
+                  duration: 0.7,
+                  delay: index * 0.08,
                 }}
-                whileHover={{
-                  y: -12,
-                }}
-                className="group bg-white rounded-[32px] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500"
+                viewport={{ once: true }}
+                whileHover={{ y: -10 }}
+                className="group overflow-hidden rounded-[30px] border border-yellow-500/20 bg-white/5 backdrop-blur-xl"
               >
-                {/* IMAGE */}
-                <div className="relative overflow-hidden h-[320px]">
-
-                  <motion.img
-                    whileHover={{
-                      scale: 1.1,
-                    }}
-                    transition={{
-                      duration: 0.8,
-                    }}
+                {/* Image */}
+                <div className="relative h-80 overflow-hidden">
+                  <img
                     src={service.image}
                     alt={service.title}
-                    className="w-full h-full object-cover"
+                    className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
                   />
 
-                  {/* OVERLAY */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
 
-                  {/* ICON */}
                   <motion.div
-                    whileHover={{
-                      rotate: 8,
-                      scale: 1.1,
-                    }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 250,
-                    }}
-                    className="absolute top-5 left-5 w-14 h-14 rounded-2xl bg-yellow-100 backdrop-blur-lg border border-white/20 flex items-center justify-center text-red-400"
+                    whileHover={{ rotate: 360 }}
+                    transition={{ duration: 0.8 }}
+                    className="absolute left-6 top-6 flex h-14 w-14 items-center justify-center rounded-full border border-yellow-400/40 bg-black/60 backdrop-blur-lg"
                   >
-                    {service.icon}
+                    <Icon className="text-yellow-400" size={26} />
                   </motion.div>
-
-                  {/* TITLE */}
-                  <div className="absolute bottom-6 left-6">
-                    <h3 className="text-3xl font-bold text-white">
-                      {service.title}
-                    </h3>
-                  </div>
                 </div>
 
-                {/* CONTENT */}
-                <div className="p-7">
-                  <p className="text-gray-600 leading-relaxed">
-                    {service.desc}
+                {/* Content */}
+                <div className="p-8">
+                  <h3 className="mb-4 text-2xl font-semibold text-white">
+                    {service.title}
+                  </h3>
+
+                  <p className="leading-7 text-gray-400">
+                    {service.description}
                   </p>
 
-                  {/* BUTTON */}
-                  <motion.button
-                    whileHover={{
-                      x: 5,
-                    }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 200,
-                    }}
-                    className="mt-7 flex items-center gap-2 text-red-700 cursor-pointer font-semibold"
-                  >
-                   
-                    <Link
-                    to={`/service/${service.id}`}
-                    className="mt-6 inline-flex items-center gap-2 text-red-700 font-semibold"
-                  >
-                    View More
-                    <ArrowUpRight size={18} />
-                  </Link>
-                    
-                  </motion.button>
+                 <Link
+ 
+  to={`/services/${service.id}`}
+  className="mt-8 inline-flex items-center gap-3 text-yellow-400 transition hover:gap-5"
+>
+  View More
+
+  <ArrowUpRight
+    size={18}
+    className="transition group-hover:rotate-45"
+  />
+</Link>
                 </div>
 
-                {/* TOP BORDER EFFECT */}
-                <motion.div
-                  initial={{
-                    width: "0%",
-                  }}
-                  whileHover={{
-                    width: "100%",
-                  }}
-                  transition={{
-                    duration: 0.5,
-                  }}
-                  className="h-1 bg-red-700"
-                />
+                {/* Gold Line */}
+                <div className="h-[2px] w-0 bg-gradient-to-r from-yellow-400 to-yellow-200 transition-all duration-700 group-hover:w-full" />
               </motion.div>
-            ))}
-          </div>
+            );
+          })}
         </div>
-      </section>
-    </div>
+
+        {/* Bottom CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="mt-20 flex justify-center"
+        >
+          <Link
+            to="/contact"
+            className="rounded-full border border-yellow-400 bg-yellow-400 px-10 py-4 font-semibold text-black transition duration-300 hover:scale-105 hover:bg-yellow-300"
+          >
+            Contact Us
+          </Link>
+        </motion.div>
+      </div>
+    </section>
   );
 }
 

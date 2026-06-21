@@ -8,11 +8,15 @@ import ContactPage from "./pages/ContactPage";
 import ServiceDetails from "./pages/ServiceDetails"; // ADD THIS
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
+import Navbar from "./components/Navbar";
+import Products from "./pages/Products";
 
 function App() {
   return (
     <>
     <ScrollToTop />
+
+    <Navbar />
     <Routes>
        
 
@@ -23,12 +27,13 @@ function App() {
       <Route path="/services" element={<Services />} />
 
       <Route path="/contact" element={<ContactPage />} />
+       <Route path="/products" element={<Products />} />
+
 
       {/* Service Details Page */}
-      <Route
-        path="/service/:id"
-        element={<ServiceDetails />}
-      />
+    
+
+      <Route path="/services/:id" element={<ServiceDetails />} />
     </Routes>
     <Footer />
     </>

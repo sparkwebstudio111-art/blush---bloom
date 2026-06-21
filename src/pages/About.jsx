@@ -1,192 +1,207 @@
 import React from "react";
 import { motion } from "framer-motion";
-import aboutImg from "../images/owner.jpg";
+import background from "../images/makeupArtist.png";
+import { Link } from "react-router-dom";
 
-import {
-  Sparkles,
-  HeartHandshake,
-  Crown,
-  BadgeCheck,
-} from "lucide-react";
-import Navbar from "../components/Navbar";
+const fadeUp = {
+  hidden: {
+    opacity: 0,
+    y: 50,
+  },
+  visible: (delay) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.9,
+      delay,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  }),
+};
 
 function About() {
   return (
-   <div>
+    <section className="relative min-h-screen overflow-hidden py-24">
 
-<Navbar />
+      {/* Background */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${background})`,
+          backgroundAttachment: "fixed",
+          backgroundSize: "cover",
+        }}
+      />
 
- <section className="relative overflow-hidden bg-red-700 py-20 px-4 sm:px-6 lg:px-20 text-white">
-      
-      {/* Background Glow */}
-      <div className="absolute top-0 left-0 w-72 h-72 bg-pink-400/20 blur-3xl rounded-full"></div>
-      <div className="absolute bottom-0 right-0 w-72 h-72 bg-yellow-300/10 blur-3xl rounded-full"></div>
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/75 to-black/90" />
 
-      <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-        
-        {/* IMAGE SECTION */}
-        <motion.div
-          initial={{ opacity: 0, x: -80 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="flex justify-center"
-        >
-          <div className="relative">
-            
-            {/* Main Image */}
-<img
-  src={aboutImg}
-  alt="Indian Beauty Parlour"
-  className="
-    w-full
-    lg:w-[900px]
-    xl:w-[1000px]
-    h-[500px]
-    sm:h-[650px]
-    lg:h-[750px]
-    object-cover
-    rounded-[40px]
-    shadow-2xl
-    border-4 border-white/10
-    hover:scale-105
-    transition duration-500
-  "
-/>
+      {/* Golden Glow */}
+      <div className="absolute -left-20 top-10 w-96 h-96 rounded-full bg-yellow-500/10 blur-[150px]" />
+      <div className="absolute right-0 bottom-0 w-80 h-80 rounded-full bg-amber-400/10 blur-[150px]" />
 
-            {/* Floating Badge */}
-            <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{
-                repeat: Infinity,
-                duration: 3,
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
+
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+
+          {/* Left */}
+
+          <motion.div
+            custom={0.2}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+
+            <p className="uppercase tracking-[8px] text-yellow-400 text-xs font-medium mb-5">
+              About Our Parlour
+            </p>
+
+            <h2
+              className="
+              font-['Cormorant_Garamond']
+              text-5xl
+              md:text-6xl
+              lg:text-7xl
+              text-white
+              font-semibold
+              leading-tight
+            "
+            >
+              Elegance
+              <br />
+
+              <span className="bg-gradient-to-r from-yellow-200 via-yellow-500 to-yellow-700 bg-clip-text text-transparent">
+                in Every Touch
+              </span>
+            </h2>
+
+            <div className="w-28 h-[2px] bg-gradient-to-r from-yellow-500 to-transparent mt-8 mb-8" />
+
+            <p className="text-gray-300 leading-8 text-lg font-['Poppins']">
+              At our beauty parlour, we believe that beauty is more than appearance—it's about confidence, self-care, and feeling your absolute best. We offer a complete range of professional beauty services, including hair styling, skincare treatments, bridal makeup, facials, nail care, and grooming services, all tailored to your unique needs.
+            </p>
+
+            <p className="text-gray-400 leading-8 text-lg mt-6 font-['Poppins']">
+              Our experienced beauty experts use premium products and the latest techniques to deliver exceptional results in a relaxing and luxurious environment. Whether you're preparing for a special occasion or simply treating yourself to some well-deserved pampering, we are dedicated to enhancing your natural beauty and creating an unforgettable experience that leaves you looking radiant and feeling confident.
+            </p>
+
+            <motion.button
+              whileHover={{
+                scale: 1.05,
+              }}
+              whileTap={{
+                scale: 0.98,
               }}
               className="
-                absolute
-                -bottom-6
-                -right-6
-                bg-yellow-400
-                text-red-700
-                px-6
-                py-4
-                rounded-2xl
-                shadow-xl
-                font-bold
-                text-lg
-              "
-            >
-              5+ Years Experience
-            </motion.div>
-          </div>
-        </motion.div>
-
-        {/* CONTENT SECTION */}
-        <motion.div
-          initial={{ opacity: 0, x: 80 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <span className="bg-white/10 border border-white/20 px-5 py-2 rounded-full text-yellow-300 uppercase tracking-widest text-sm">
-            About Us
-          </span>
-
-          <h2 className="mt-6 text-4xl sm:text-5xl font-extrabold leading-tight">
-            Bringing Out Your{" "}
-            <span className="text-yellow-300">
-              Natural Beauty
-            </span>
-          </h2>
-
-          <p className="mt-6 text-white/80 text-lg leading-relaxed">
-            Welcome to <strong>Blush & Bloom</strong>, a luxury Indian beauty
-            parlour dedicated to enhancing your confidence, elegance,
-            and beauty. We specialize in bridal makeup, professional
-            hairstyling, skincare treatments, facials, spa therapies,
-            and modern beauty solutions tailored for every woman.
-          </p>
-
-          <p className="mt-5 text-white/70 leading-relaxed">
-            Our expert beauticians use premium products and advanced
-            beauty techniques to deliver a relaxing and luxurious
-            experience. Whether it's your wedding day, engagement,
-            party, or self-care session — we ensure you look and feel
-            your absolute best.
-          </p>
-
-          {/* FEATURES */}
-          <div className="mt-10 grid sm:grid-cols-2 gap-5">
-            
-            {[
-              {
-                icon: <Sparkles size={26} />,
-                title: "Premium Services",
-              },
-              {
-                icon: <Crown size={26} />,
-                title: "Luxury Experience",
-              },
-              {
-                icon: <BadgeCheck size={26} />,
-                title: "Certified Experts",
-              },
-              {
-                icon: <HeartHandshake size={26} />,
-                title: "Trusted By Clients",
-              },
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                whileHover={{
-                  scale: 1.03,
-                  y: -5,
-                }}
-                className="
-                  flex
-                  items-center
-                  gap-4
-                  bg-white/10
-                  border border-white/10
-                  backdrop-blur-md
-                  p-5
-                  rounded-2xl
-                  shadow-lg
-                "
-              >
-                <div className="text-yellow-300">
-                  {item.icon}
-                </div>
-
-                <h3 className="font-semibold text-lg">
-                  {item.title}
-                </h3>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* BUTTON */}
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="
               mt-10
-              bg-yellow-400
-              hover:bg-yellow-300
-              text-red-700
               px-8
               py-4
               rounded-full
+              bg-gradient-to-r
+              from-yellow-500
+              to-yellow-600
+              text-black
               font-semibold
-              text-lg
               shadow-xl
-              transition duration-300
+              hover:shadow-yellow-500/30
+              transition-all cursor-pointer
             "
-          >
-            Explore Services
-          </motion.button>
-        </motion.div>
-      </div>
-    </section>
+            >
+             <Link to={"/services"}> Explore Service</Link>
+            </motion.button>
 
-   </div>
+          </motion.div>
+
+          {/* Right */}
+
+         <motion.div
+  custom={0.5}
+  variants={fadeUp}
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true }}
+  className="relative"
+>
+  {/* Background Glow */}
+  <div className="absolute -top-10 -right-10 w-52 h-52 bg-yellow-500/10 blur-[100px] rounded-full" />
+
+  <div className="relative grid grid-cols-2 gap-5">
+
+    {[
+      {
+        value: "10+",
+        title: "Years of Excellence",
+      },
+      {
+        value: "5+",
+        title: "Services",
+      },
+      {
+        value: "250+",
+        title: "Exclusive clients",
+      },
+      {
+        value: "100%",
+        title: "Quality Products",
+      },
+    ].map((item, index) => (
+      <motion.div
+        key={index}
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: 0.6,
+          delay: index * 0.15,
+        }}
+        whileHover={{
+          y: -8,
+          scale: 1.03,
+        }}
+        className="
+          relative
+          overflow-hidden
+          rounded-3xl
+          border
+          border-yellow-500/20
+          bg-gradient-to-br
+          from-white/10
+          to-white/5
+          backdrop-blur-2xl
+          p-8
+          transition-all
+          duration-500
+          hover:border-yellow-400/60
+          hover:shadow-[0_0_35px_rgba(255,193,7,0.18)]
+        "
+      >
+        {/* Top Gradient */}
+        <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-yellow-400 to-transparent" />
+
+        {/* Number */}
+        <h2 className="font-['Cormorant_Garamond'] text-5xl md:text-6xl font-bold bg-gradient-to-r from-yellow-200 via-yellow-500 to-yellow-700 bg-clip-text text-transparent">
+          {item.value}
+        </h2>
+
+        {/* Label */}
+        <p className="mt-3 text-sm md:text-base text-gray-300 tracking-wide font-['Poppins'] leading-6">
+          {item.title}
+        </p>
+
+        {/* Decorative Circle */}
+        <div className="absolute -bottom-10 -right-10 w-24 h-24 rounded-full bg-yellow-500/10 blur-2xl" />
+      </motion.div>
+    ))}
+
+  </div>
+</motion.div>
+
+        </div>
+
+      </div>
+
+    </section>
   );
 }
 
