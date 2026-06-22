@@ -1,6 +1,6 @@
 import React from "react";
-import background from "../images/aboutImg.jpeg";
-import mblBackground from "../images/aboutImg.jpeg";
+// import background from "../images/aboutImg.jpeg";
+// import mblBackground from "../images/aboutImg.jpeg";
 import { motion } from "framer-motion";
 
 const fadeUp = {
@@ -24,7 +24,7 @@ function Hero() {
     <section className="py-20 relative min-h-screen overflow-hidden">
 
       {/* Desktop Background */}
-<div
+{/* <div
   className="absolute inset-0 hidden md:block bg-cover bg-center"
   style={{
     backgroundImage: `url(${background})`,
@@ -32,10 +32,10 @@ function Hero() {
     backgroundPosition: "center",
     backgroundSize: "cover",
   }}
-      />
+      /> */}
 
       {/* Mobile Background */}
-      <div
+      {/* <div
         className="absolute inset-0 block md:hidden bg-cover bg-center"
        style={{
   backgroundImage: `url(${background})`,
@@ -43,7 +43,7 @@ function Hero() {
   backgroundPosition: "center",
   backgroundSize: "cover",
 }}
-      />
+      /> */}
 
       {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/10 via-black/15 to-black/55" />

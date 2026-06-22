@@ -23,7 +23,7 @@ function Home() {
       />
 
       {/* Dark Overlay */}
-      <div className="fixed inset-0 -z-10 bg-black/75" />
+      <div className="fixed inset-0 -z-10 bg-black/25" />
 
       {/* Content */}
       
