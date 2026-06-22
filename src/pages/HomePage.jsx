@@ -119,13 +119,13 @@ function HomePage() {
         style={{ backgroundImage: `url(${HomeBackground})` }}
       >
         {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/50 to-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60  via-black/50 to-black/70" />
 
         {/* Animated Glow */}
         <motion.div
           animate={{ x: [0, 40, 0], y: [0, 30, 0] }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-32 -left-24 w-96 h-96 rounded-full bg-yellow-500/10 blur-[140px]"
+          className="absolute -top-32 -left-24 w-96 h-96 rounded-full bg-yellow-200/0 blur-[140px]"
         />
 
         <motion.div
