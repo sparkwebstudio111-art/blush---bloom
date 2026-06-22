@@ -6,7 +6,7 @@ import WhyMe from "../components/WhyMe";
 import SimpleService from "../components/SimpleService";
 import UserReview from "../components/UserReview";
 
-import aboutImg from "../images/aboutImg.jpeg";
+import aboutImg from "../images/HomeBackground.jpeg";
 
 function Home() {
   return (

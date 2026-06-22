@@ -10,6 +10,7 @@ import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import Navbar from "./components/Navbar";
 import Products from "./pages/Products";
+import HomePage from "./pages/HomePage";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
     <Routes>
        
 
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<HomePage />} />
 
       <Route path="/about" element={<About />} />
 
